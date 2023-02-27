@@ -1,9 +1,10 @@
-import "./App.css";
+// import "./App.css";
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Reset from "./Reset";
-import Dashboard from "./Dashboard";
+import Dashboard from './Dashboard';
 
 function App() {
   return (
