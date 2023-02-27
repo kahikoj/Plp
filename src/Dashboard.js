@@ -3,6 +3,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
 
+//Css//
+import './App.css'
+
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
 
@@ -36,12 +39,12 @@ const Dashboard = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={12} md={6}>
           <TaskForm onAddTask={handleAddTask} />
         </Col>
-      </Row>
-      <Row>
-        <Col>
+        <br/>
+        
+        <Col xs={12} md={6}>
           <TaskList
             tasks={tasks}
             onCompleteTask={handleCompleteTask}
