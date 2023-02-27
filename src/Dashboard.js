@@ -1,42 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
-import "./Dashboard.css";
-import { auth, db, logout } from "./firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import React, { useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import TaskForm from './TaskForm';
+import TaskList from './TaskList';
 
+const Dashboard = () => {
+  const [tasks, setTasks] = useState([]);
 
-function Dashboard() {
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
-  const fetchUserName = async () => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      setName(data.name);
-    } catch (err) {
-      console.error(err);
-      alert("An error occured while fetching user data");
-    }
+  const handleAddTask = (task) => {
+    setTasks([...tasks, { ...task, id: Date.now(), completed: false }]);
   };
-  useEffect(() => {
-    if (loading) return;
-    if (!user) return navigate("/");
-    fetchUserName();
-  }, [user, loading, navigate,]);
+
+  const handleCompleteTask = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const handleEditTask = (editedTask) => {
+    setTasks(
+      tasks.map((task) => (task.id === editedTask.id ? editedTask : task))
+    );
+  };
+
+  const handleDeleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   return (
-    <div className="dashboard">
-       <div className="dashboard__container">
-        Logged in as
-         <div>{name}</div>
-         <div>{user?.email}</div>
-         <button className="dashboard__btn" onClick={logout}>
-          Logout
-         </button>
-       </div>
-     </div>
+    <Container className="mt-3">
+      <Row>
+        <Col>
+          <h1>Task Manager</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <TaskForm onAddTask={handleAddTask} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <TaskList
+            tasks={tasks}
+            onCompleteTask={handleCompleteTask}
+            onEditTask={handleEditTask}
+            onDeleteTask={handleDeleteTask}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
-}
+};
+
 export default Dashboard;
