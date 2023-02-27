@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
+import MyNavbar from './Navbar'
 
 //Css//
 import './App.css'
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
+  const [taskIdCounter, setTaskIdCounter] = useState(0);
 
   const handleAddTask = (task) => {
-    setTasks([...tasks, { ...task, id: Date.now(), completed: false }]);
+    const newTask = { ...task, id: taskIdCounter, completed: false };
+    setTasks([...tasks, newTask]);
+    setTaskIdCounter(taskIdCounter + 1);
   };
 
   const handleCompleteTask = (id) => {
@@ -21,39 +25,42 @@ const Dashboard = () => {
     );
   };
 
-  const handleEditTask = (editedTask) => {
-    setTasks(
-      tasks.map((task) => (task.id === editedTask.id ? editedTask : task))
+  const handleEditTask = (updatedTask) => {
+    const newTasks = tasks.map((task) =>
+      task.id === updatedTask.id ? updatedTask : task
     );
+    setTasks(newTasks);
   };
 
-  const handleDeleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const handleDeleteTask = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(newTasks);
   };
 
   return (
-    <Container className="mt-3">
-      <Row>
-        <Col>
-          <h1>Task Manager</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={6}>
-          <TaskForm onAddTask={handleAddTask} />
-        </Col>
-        <br/>
-        
-        <Col xs={12} md={6}>
-          <TaskList
-            tasks={tasks}
-            onCompleteTask={handleCompleteTask}
-            onEditTask={handleEditTask}
-            onDeleteTask={handleDeleteTask}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <MyNavbar />
+      <Container className="container">
+        <Row>
+          <Col>
+            <h1>Task Manager</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={6}>
+            <TaskForm onAddTask={handleAddTask} />
+          </Col>
+          <Col xs={12} md={6}>
+            <TaskList
+              tasks={tasks}
+              onCompleteTask={handleCompleteTask}
+              onEditTask={handleEditTask}
+              onDeleteTask={handleDeleteTask}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
