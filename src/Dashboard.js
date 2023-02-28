@@ -40,11 +40,11 @@ const Dashboard = () => {
   return (
     <>
       <MyNavbar />
+      <Container className='hcontainer d-flex align-items-center justify-content-center'>
         <Row>
-          <Col>
             <h1>Task Manager</h1>
-          </Col>
         </Row>
+      </Container>  
       <div className="container-wrapper">
      
         <Container className="container">
