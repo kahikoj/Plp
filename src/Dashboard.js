@@ -40,6 +40,8 @@ const Dashboard = () => {
   return (
     <>
       <MyNavbar />
+      <div className="container-wrapper">
+
       <Container className="container">
         <Row>
           <Col>
@@ -47,10 +49,14 @@ const Dashboard = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={6}>
+          <Col md={6}>
             <TaskForm onAddTask={handleAddTask} />
           </Col>
-          <Col xs={12} md={6}>
+        </Row>
+      </Container>
+      <Container className="container">
+        <Row>
+        <Col md={6}>
             <TaskList
               tasks={tasks}
               onCompleteTask={handleCompleteTask}
@@ -60,6 +66,7 @@ const Dashboard = () => {
           </Col>
         </Row>
       </Container>
+      </div>
     </>
   );
 };

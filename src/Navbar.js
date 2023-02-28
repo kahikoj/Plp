@@ -24,12 +24,12 @@ const MyNavbar = () => {
           <FormControl className="my-navbar__search" type="text" placeholder="Search" />
         </Form>
       </div>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto my-navbar__right">
           <Nav.Link href="/tasks/new"><FaPlus className="my-navbar__icon" /></Nav.Link>
           <Nav.Link href="#"><FaBell className="my-navbar__icon" /></Nav.Link>
-          <Nav.Link className="my-navbar__logout" onClick={handleLogout}>Logout</Nav.Link>
+          <Nav.Link className="my-navbar__logout" onClick={handleLogout}></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
