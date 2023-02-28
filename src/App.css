@@ -3,23 +3,6 @@ body {
   background-color: #f2f2f2;
 }
 
-/* Style for the container */
-.container {
-  background-color: rgb(241, 237, 237);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: left;
-}
-
-
-.add-task, .task-list {
-  flex-basis: 48%;
-}
-
 /* Style for the h1 */
 h1 {
   font-size: 36px;
@@ -27,6 +10,40 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
 }
+
+
+.container-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(241, 237, 237);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the container  */
+/* .container {
+ 
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+} */
+
+
+
+.container {
+  width: 45%;
+}
+
+
+.add-task, .task-list {
+  flex-basis: 48%;
+}
+
+
 
 /* Style for the form */
 .form-control {

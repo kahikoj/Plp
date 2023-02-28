@@ -40,32 +40,33 @@ const Dashboard = () => {
   return (
     <>
       <MyNavbar />
-      <div className="container-wrapper">
-
-      <Container className="container">
         <Row>
           <Col>
             <h1>Task Manager</h1>
           </Col>
         </Row>
-        <Row>
+      <div className="container-wrapper">
+     
+        <Container className="container">
+          
+          <Row>
+            <Col md={6}>
+              <TaskForm onAddTask={handleAddTask} />
+            </Col>
+          </Row>
+        </Container>
+        <Container className="container">
+          <Row>
           <Col md={6}>
-            <TaskForm onAddTask={handleAddTask} />
-          </Col>
-        </Row>
-      </Container>
-      <Container className="container">
-        <Row>
-        <Col md={6}>
-            <TaskList
-              tasks={tasks}
-              onCompleteTask={handleCompleteTask}
-              onEditTask={handleEditTask}
-              onDeleteTask={handleDeleteTask}
-            />
-          </Col>
-        </Row>
-      </Container>
+              <TaskList
+                tasks={tasks}
+                onCompleteTask={handleCompleteTask}
+                onEditTask={handleEditTask}
+                onDeleteTask={handleDeleteTask}
+              />
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );
